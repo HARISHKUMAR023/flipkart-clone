@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-let isOpen : boolean;
-let setIsOpen : boolean;
+
 const LoginModel = ({isOpen ,setIsOpen}) => {
     const [ email , setEmail] = useState("");
     const [password , setPassword ] = useState("");
