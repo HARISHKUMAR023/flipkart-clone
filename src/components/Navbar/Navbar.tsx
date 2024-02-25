@@ -4,7 +4,7 @@ import  './Navbar.css';
 import { IoSearch } from 'react-icons/io5';
 import {  MdKeyboardArrowDown } from "react-icons/md";
 import { FaShoppingCart } from 'react-icons/fa';
-import LoginModel from '../LoginModel/LoginModel';
+// import LoginModel from '../LoginModel/LoginModel';
 
 
 const Navbar = () => {
@@ -47,7 +47,7 @@ const Navbar = () => {
 </div>
 
     </div>
-    <LoginModel  isOpen={isOpen} setIsOpen={setIsOpen}/>
+    {/* <LoginModel  isOpen={isOpen} setIsOpen={setIsOpen}/> */}
    </>
   )
 }
