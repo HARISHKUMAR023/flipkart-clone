@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import './LoginModel.css';
+import { RxCross2 } from 'react-icons/rx';
 
-const LoginModel = ({isOpen ,setIsOpen}) => {
+const LoginModel = ({isOpen , setIsOpen}:{
+  isOpen :  boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
     const [ email , setEmail] = useState("");
     const [password , setPassword ] = useState("");
     const [loginType , setLoginType] = useState(true);
@@ -45,7 +50,7 @@ const LoginModel = ({isOpen ,setIsOpen}) => {
     {
         loginType ? ( 
             <p className='Login-signup' onClick={()=>setLoginType(false)}>
-                Now to FLipkart Create an account
+                New to Flipkart ? Create an account
             </p>
         ):(
             <p className="Login-signup" onClick={()=> setLoginType(true)}>
@@ -53,10 +58,11 @@ const LoginModel = ({isOpen ,setIsOpen}) => {
             </p>
         )
     }
-
-    
-  
     </div>
+    <div className="close" onClick={()=>{setIsOpen(false)}}>
+      <RxCross2/>
+    </div>
+
   </div>
     </div>
   ): ( <></>);
