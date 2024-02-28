@@ -1,14 +1,46 @@
 import { useState } from 'react'
 import './LoginModel.css';
 import { RxCross2 } from 'react-icons/rx';
+import subabase from "../../subabase";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../slices/userSlices';
 
-const LoginModel = ({isOpen , setIsOpen}:{
-  isOpen :  boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const LoginModel = ({isOpen , setIsOpen}) => {
     const [ email , setEmail] = useState("");
     const [password , setPassword ] = useState("");
     const [loginType , setLoginType] = useState(true);
+    const dispatch = useDispatch();
+
+const Signup = async ()=>{
+
+  const {data , error }= await subabase.auth.signUp({
+    email,
+    password,
+  });
+ if(data.user){
+  alert("User is created.Please verify your email. ")
+ }else{
+  alert(error?.message)
+ }
+};
+
+const login = async ()=>{
+  const {data, error } = await subabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  if(error){
+    alert(error?.message)
+  }
+  dispatch(setUser(data.user))
+
+return  
+  // alert(error?.message)
+  // console.log(data,error)
+}
+
+
+
   return isOpen ? (
     <div className='overlay'>
   <div className="LoginModel">
@@ -42,9 +74,9 @@ const LoginModel = ({isOpen , setIsOpen}:{
   </p>
   {
     loginType ? (
-        <button className="Login-btn">Login</button>
+        <button className="Login-btn" onClick={login}>Login</button>
     ):(
-        <button className="Login-btn">Signup</button>
+        <button className="Login-btn" onClick={Signup}>Signup</button>
     )}
 
     {

@@ -1,14 +1,31 @@
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import  './Navbar.css';
 import { IoSearch } from 'react-icons/io5';
 import {  MdKeyboardArrowDown } from "react-icons/md";
 import { FaShoppingCart } from 'react-icons/fa';
 import LoginModel from '../LoginModel/LoginModel';
+import { useDispatch, useSelector } from 'react-redux';
+import Supabase from '../../subabase';
 
 
 const Navbar = () => {
     const [isOpen , setIsOpen] = useState(false);
+    const user = useSelector((state)=>state.userData.user);
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        if(user){
+            setIsOpen(false);
+        }
+    },[user]);
+
+    const signOut = async ()=>{
+        const { error } = await Supabase.auth.signOut();
+        if(!error){
+            dispatch(removeUser());
+        }
+    }
+    
   return (
    <>
    <div className="navbar-container">
@@ -24,9 +41,9 @@ const Navbar = () => {
    <IoSearch/>
    </button>
    </div>
-    <button className="navbar-btn" onClick={()=>setIsOpen(true)}>
+  { user ? (<h3 onClick={signOut}>@{user?.email.slice(0,10)}</h3>):<button className="navbar-btn" onClick={()=>setIsOpen(true)}>
         Login
-    </button>
+    </button>}
     <div className="navbar-bcs">
         <h3>Become a Seller</h3>
     </div>
