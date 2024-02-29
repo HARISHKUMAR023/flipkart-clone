@@ -7,6 +7,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import LoginModel from '../LoginModel/LoginModel';
 import { useDispatch, useSelector } from 'react-redux';
 import Supabase from '../../subabase';
+import { removeUser } from '../../slices/userSlices';
 
 
 const Navbar = () => {

@@ -6,18 +6,25 @@ import Productes from './pages/Productes/Productes';
 import Cart from './pages/Cart/Cart';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import { Provider, useDispatch } from 'react-redux';
-import {store} from "./app/store";
+import { useDispatch } from 'react-redux';
 import Supabase from './subabase';
+import { useEffect } from 'react';
+import { setUser} from './slices/userSlices';
 function App() {
 const dispatch = useDispatch();
-const getuser =async ()=>{
- const {data , error} = await Supabase.auth.getSession();
- console.log(data);
-}
+ const getuser =async ()=>{
+  const {data , error} = await Supabase.auth.getSession();
+  if(data.session){
+    dispatch(setUser(data.session.user));
+  }
+
+};
+useEffect(()=>{
+  getuser();
+},[]);
 
   return (
-    <Provider store={store}>
+  
  <BrowserRouter>
 <Navbar/>
     <Routes>
@@ -27,7 +34,7 @@ const getuser =async ()=>{
       <Route path='/card' element={<Cart/>}></Route>
     </Routes>
     </BrowserRouter>
-    </Provider>
+  
    
     
   )
