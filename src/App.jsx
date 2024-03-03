@@ -1,6 +1,6 @@
 
 import './App.css'
-import Productdetials from './pages/Productdetiles/Productdetials';
+import ProductDetails from './pages/Productdetiles/ProductDetails';
 import Home from './pages/Home/Home';
 import Productes from './pages/Productes/Productes';
 import Cart from './pages/Cart/Cart';
@@ -30,8 +30,8 @@ useEffect(()=>{
     <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/products' element={<Productes/>}></Route>
-      <Route path='/productsdetials/:id' element={<Productdetials/>}></Route>
-      <Route path='/card' element={<Cart/>}></Route>
+      <Route path="/productdetails/:id" element={<ProductDetails />} />
+      <Route path='/cart' element={<Cart/>}></Route>
     </Routes>
     </BrowserRouter>
   
